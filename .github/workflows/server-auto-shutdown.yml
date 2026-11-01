@@ -13,6 +13,6 @@ jobs:
     steps:
       - name: Check Environment state
         run: |
-          echo "Current System Time (UTC): $(Date)"
+          echo "Current System Time (UTC): $(date)"
           echo "Evaluating Scheduled Task Execution..."
           
