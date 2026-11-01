@@ -1,19 +1,22 @@
-#!/bin/bash
-# 1. Check for Root User immediately
-if [ "$(id -u)" -ne 0 ]; then
-    echo "Error: This patch must be run as root." >&2
-    exit 1
-fi
+name: Linux Auto Patch
 
-echo "Start Patching Activity"
+on:
+  push:
+    branches: [ "main" ]
 
-echo "-----------------------------------------------------"
-echo "Check the list of installed packages"
-apt list --installed
-echo "------------------------------------------------------"
-echo "Check the Kernel"
-uname -a
-echo "-------------------------------------------------------"
-echo "Check OS Information"
-cat /etc/os-release
-echo "--------------------------------------------------------"
+jobs:
+  patch-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      # IMPORTANT: If your commands span multiple lines, you MUST use the | character
+      - name: Run inline patch scripts
+        run: |
+          echo "Start Patching Activity"
+          echo "----------------------------------------"
+          apt list --installed
+          uname -a
+          cat /etc/os-release
+
