@@ -1,0 +1,19 @@
+#!/bin/bash
+# 1. Check for Root User immediately
+if [ "$(id -u)" -ne 0 ]; then
+    echo "Error: This patch must be run as root." >&2
+    exit 1
+fi
+
+echo "Start Patching Activity"
+
+echo "-----------------------------------------------------"
+echo "Check the list of installed packages"
+apt list --installed
+echo "------------------------------------------------------"
+echo "Check the Kernel"
+uname -a
+echo "-------------------------------------------------------"
+echo "Check OS Information"
+cat /etc/os-release
+echo "--------------------------------------------------------"
